@@ -23,14 +23,14 @@ CREATE TABLE resource_comments (
 CREATE TABLE resource_rates (
   id SERIAL PRIMARY KEY NOT NULL,
   resource_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   rating FLOAT NOT NULL
 );
 
 CREATE TABLE user_likes (
   id SERIAL PRIMARY KEY NOT NULL,
   resource_id INTEGER REFERENCES resources(id),
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE users (
