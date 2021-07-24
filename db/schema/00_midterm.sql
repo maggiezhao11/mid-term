@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS categories CASCADE;
 DROP TABLE IF EXISTS resource_comments CASCADE;
+DROP TABLE IF EXISTS resource_rates CASCADE;
+DROP TABLE IF EXISTS user_likes CASCADE;
 
 CREATE TABLE categories (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -13,4 +15,18 @@ CREATE TABLE resource_comments (
   resource_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
   owner_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
   comment TEXT NOT NULL,
+);
+
+
+CREATE TABLE resource_rates (
+  id SERIAL PRIMARY KEY NOT NULL,
+  resource_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  rating FLOAT NOT NULL
+);
+
+CREATE TABLE user_likes (
+  id SERIAL PRIMARY KEY NOT NULL,
+  resource_id INTEGER REFERENCES resources(id),
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
