@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS categories CASCADE;
+DROP TABLE IF EXISTS resource_comments CASCADE;
+
+CREATE TABLE categories (
+  id SERIAL PRIMARY KEY NOT NULL,
+  resource_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
+  topic VARCHAR(255) NOT NULL,
+
+);
+
+CREATE TABLE resource_comments (
+  id SERIAL PRIMARY KEY NOT NULL,
+  resource_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
+  owner_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
+  comment TEXT NOT NULL,
+);
