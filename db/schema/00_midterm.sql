@@ -7,8 +7,7 @@ DROP TABLE IF EXISTS resources CASCADE;
 
 CREATE TABLE categories (
   id SERIAL PRIMARY KEY NOT NULL,
-  resource_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
-  topic VARCHAR(255) NOT NULL,
+  topic VARCHAR(255) NOT NULL
 
 );
 
