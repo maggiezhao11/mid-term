@@ -5,6 +5,14 @@ DROP TABLE IF EXISTS resource_comments CASCADE;
 DROP TABLE IF EXISTS resource_rates CASCADE;
 DROP TABLE IF EXISTS user_likes CASCADE;
 
+
+CREATE TABLE categories (
+  id SERIAL PRIMARY KEY NOT NULL,
+  topic VARCHAR(255) NOT NULL
+
+);
+
+
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
@@ -22,11 +30,7 @@ CREATE TABLE resources (
   description TEXT NOT NULL
 );
 
-CREATE TABLE categories (
-  id SERIAL PRIMARY KEY NOT NULL,
-  topic VARCHAR(255) NOT NULL
 
-);
 
 CREATE TABLE resource_comments (
   id SERIAL PRIMARY KEY NOT NULL,
