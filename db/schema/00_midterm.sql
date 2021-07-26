@@ -12,7 +12,6 @@ CREATE TABLE categories (
 
 );
 
-
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
@@ -31,14 +30,12 @@ CREATE TABLE resources (
 );
 
 
-
 CREATE TABLE resource_comments (
   id SERIAL PRIMARY KEY NOT NULL,
   resource_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
   owner_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
-  comment TEXT NOT NULL,
+  comment TEXT NOT NULL
 );
-
 
 CREATE TABLE resource_rates (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -49,7 +46,6 @@ CREATE TABLE resource_rates (
 
 CREATE TABLE user_likes (
   id SERIAL PRIMARY KEY NOT NULL,
-  resource_id INTEGER REFERENCES resources(id),
+  resource_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
   owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
-
