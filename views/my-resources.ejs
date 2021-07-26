@@ -12,17 +12,65 @@
 
   <body>
 
-    <%- include('partials/_header') %>
+  <%- //include('partials/_header') %>
 
-    <main style="margin: 1em;">
+    <main>
       <h3>My Resources</h3>
-
-        <section class="my-resources-container">
-          <div class="owned-resources">
-
-          </div>
-          <div class="liked-resource">
-
+      <section class="my-resources-container">
+      <div class="owned-resources">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Owned Resources</th>
+                      <th scope="col">Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <% for(let resource of resources) { %>
+                    <tr>
+                      <td>
+                        <ul>
+                          <li>Title: <%= resource.title %></li>
+                          <li>URL: <%= resource.url%></li>
+                          <li>Description: <%= resource.description %></li>
+                          <li>Category ID: <%= resource.category_id %></li>
+                        </ul>
+                      <td><form method="GET" action="/resources/<%= resource.title %>">
+                        <button type="submit">Edit</button>
+                      </form>
+                    </td>
+                  </tr>
+                  <% } %>
+            </div>
+           </tbody>
+        </table>
+          <div class="liked-resources">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Liked Resources</th>
+                  <th scope="col">Edit</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% for(let resource of user_likes) { %>
+                <tr>
+                  <td>
+                    <ul>
+                      <li>Title: <%= resource.title %></li>
+                      <li>URL: <%= resource.url%></li>
+                      <li>Description: <%= resource.description %></li>
+                      <li>Category ID: <%= resource.category_id %></li>
+                    </ul>
+                  <td><form method="GET" action="/resources/<%= resource.title %>">
+                    <button type="submit">Edit</button>
+                  </form>
+                </td>
+              </tr>
+              <% } %>
+        </div>
+       </tbody>
+    </table>
           </div>
 
         </section>
