@@ -33,7 +33,7 @@ const resourceRouter = (db) => {
     .then(queryResult => {
       const data = queryResult.rows
       const templateVars = {data}
-      res.render('resources.ejs', templateVars)
+      res.render('resourcesId.ejs', templateVars)
     })
     .catch(err => {console.log(err.message)})
   })
