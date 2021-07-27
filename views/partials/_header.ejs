@@ -1,0 +1,31 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark bg-success">
+    <a class="navbar-brand" href="/api">Rsources Wall</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="/urls">My URLs</a>
+        <a class="nav-item nav-link" href="/urls/new">Create New URL</a>
+      </div>
+    </div>
+    <% if(user){%>
+      <label>logged in as <%= user %></label>
+      <form method="POST" action="/api/logout">
+        <button
+                  type="submit">
+              logout
+          </button>
+      </form>
+
+    <% } else{ %>  <a href="http://localhost:8080/api/register">go here to register</a>
+    <a href="http://localhost:8080/api/login">go here to log in</a>
+
+   <% } %>
+
+
+  </nav>
+</header>
+
+
