@@ -31,7 +31,6 @@ const myResources = (db) => {
       });
   });
 
-
   return router;
 };
 
