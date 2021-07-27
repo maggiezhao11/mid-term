@@ -55,9 +55,18 @@ const resourceRouter = (db) => {
 
     })
 
-
     res.redirect('/resources')
   })
+// create GET route for resource edit
+  router.get('/:id/edit' , (req, res) => {
+    const resourceId = req.params.id
+    const templateVars ={id: resourceId}
+    res.render(`/:${resourceId}/edit`, templateVars);
+
+  })
+
+
+
 
 
 
