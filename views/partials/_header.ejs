@@ -1,0 +1,48 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark bg-success">
+    <a class="navbar-brand" href="/api">Rsources Wall</a>
+
+
+    <% if(user){%>
+      <label>logged in as <%= user %></label>
+      <form method="POST" action="/api/logout">
+        <button
+                  type="submit">
+              logout
+          </button>
+      </form>
+      <form method="" action="">
+        <button
+                  type="submit">
+              Search by Topic
+          </button>
+      </form>
+      <form method="" action="">
+        <button
+                  type="submit">
+              My Resources
+          </button>
+      </form>
+      <form method="" action="">
+        <button
+                  type="submit">
+              Create New
+          </button>
+      </form>
+      <form method="" action="">
+        <button
+                  type="submit">
+              Profile
+          </button>
+      </form>
+
+    <% } else{ %>  <a href="http://localhost:8080/api/register">go here to register</a>
+    <a href="http://localhost:8080/api/login">go here to log in</a>
+
+   <% } %>
+
+
+  </nav>
+</header>
+
+
