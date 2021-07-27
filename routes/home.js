@@ -10,7 +10,6 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    console.log("user", req.cookies["user_id"]);
 
     if(!req.cookies["user_id"]) {
       res.redirect("/api/login");
@@ -21,10 +20,7 @@ module.exports = (db) => {
       .then(data => {
         const users = data.rows;
         const templateVars = { user: data.rows[0].email };
-        console.log("hometest 1");
         res.render("home", templateVars);
-        console.log("hometest 2");
-        console.log("hometest 3");
       })
       .catch(err => {
         res
