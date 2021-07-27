@@ -21,9 +21,10 @@ module.exports = (db) => {
       .then(data => {
         const users = data.rows;
         const templateVars = { user: data.rows[0].email };
+        console.log("hometest 1");
         res.render("home", templateVars);
-
-        res.json({ users });
+        console.log("hometest 2");
+        console.log("hometest 3");
       })
       .catch(err => {
         res
