@@ -17,32 +17,40 @@
     <main>
       <h3>Resources Edit</h3>
       <section class="my-resources-container">
-      <div class="owned-resources">
+      <div class="edit-resources">
                 <table class="table">
                   <thead>
                     <tr>
                       <th scope="col">Current Details</th>
                       <th scope="col">New Details</th>
-                      <th scope="col">Edit</th>
+                      <th scope="col"></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>
                         <ul>
-                          <li>Title: <%= resource.title %></li>
-                          <li>URL: <%= resource.url%></li>
-                          <li>Description: <%= resource.description %></li>
-                          <li>Category ID: <%= resource.category_id %></li>
+                          <li>Title: <%= title %></li>
+                          <li>URL: <%= url%></li>
+                          <li>Description: <%= description %></li>
+                          <li>Category: <%= topic %></li>
                         </ul>
-                      <td><a href="/resources/<%= resource.id %>/edit "> EDIT </a>
-                    </td>
-                  </tr>
-                  <% } %>
-            </div>
-           </tbody>
-        </table>
-        </section>
+                      </td>
+                      <form method="POST" action="/resources/<%=id %>/edit">
+                      <td>
+                        <ul>
+                        <li>Title:<input type="text" name="title" value="<%= title %>"> </li>
+                        <li>URL:<input type="text" name="url" value="<%= url%>"> </li>
+                        <li>Description:<input type="text" name="description" value="<%= description %>"> </li>
+                        </ul>
+                      </td>
+                        <td><button type="submit">Edit</button></td>
+                      </form>
+                    </tr>
+                  </tbody>
+                </table>
+      </div>
+      </section>
 
     </main>
       <!-- Bootstrap JS -->
