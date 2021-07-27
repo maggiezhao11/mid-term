@@ -66,10 +66,6 @@ const resourceRouter = (db) => {
   })
 
 
-
-
-
-
   return router
 };
 
