@@ -59,15 +59,46 @@ const resourceRouter = (db) => {
   })
 // create GET route for resource edit
   router.get('/:id/edit' , (req, res) => {
-    const resourceId = req.params.id
-    const templateVars ={id: resourceId}
-    res.render(`/:${resourceId}/edit`, templateVars);
-
+    db.query(`SELECT resources.id, name, topic, title,  description, url FROM resources
+    JOIN users on resources.owner_id = users.id
+    JOIN categories ON resources.category_id = categories.id
+    WHERE resources.id = $1
+    GROUP BY resources.id, name, topic, title, description, url;`, [req.params.id])
+    .then(queryResult => {
+    const data = queryResult.rows[0]
+    //const templateVars = {...data} ==> how to store everything from data to templateVars
+    //console.log("templateVars:", templateVars);
+    res.render('edit-resource', data)
+    })
+    .catch(err => {console.log(err.message)})
   })
 
-
-
-
+// create POST route for resource edit
+router.post('/:id/edit' , (req, res) => {
+  const newTitle = req.body.title
+  const newURL = req.body.url
+  const newDescription = req.body.description
+  const resourceId = req.params.id
+  const templateVars = {id: resourceId, title: newTitle, url: newURL, description: newDescription}
+  db.query(`UPDATE resources
+  SET title = $2, url = $3,  description = $4
+  WHERE resources.id = $1
+  RETURNING *;`, [resourceId, newTitle, newURL, newDescription])
+  .then(() => {
+    db.query(`SELECT resources.id, name, topic, title,  description, url FROM resources
+    JOIN users on resources.owner_id = users.id
+    JOIN categories ON resources.category_id = categories.id
+    WHERE resources.id = $1
+    GROUP BY resources.id, name, topic, title, description, url;`, [resourceId])
+    .then((queryResult) => {
+      const data = queryResult.rows[0]
+      console.log("templateVars++++++++++++:", templateVars);
+      console.log("data++++++++++++:", data);
+      res.render('edit-resource', data)
+    })
+  })
+  .catch(err => {console.log(err.message)})
+})
 
 
   return router
