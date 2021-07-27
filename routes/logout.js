@@ -12,8 +12,8 @@ const router  = express.Router();
 module.exports = (db) => {
   router.post("/", (req, res) => {
     res.clearCookie("user_id");
-    const templateVars = {user: null};
-    res.redirect("/api", templateVars);
+
+    res.redirect("/api");
   });
 
 

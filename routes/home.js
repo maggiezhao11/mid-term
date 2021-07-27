@@ -10,16 +10,19 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    console.log("register-----");
     console.log("user", req.cookies["user_id"]);
-    // const templateVars = { user: user };
+
+    if(!req.cookies["user_id"]) {
+      res.redirect("/api/login");
+      return;
+    }
 
     db.query(`SELECT * FROM users WHERE id = $1;`, [req.cookies["user_id"]])
       .then(data => {
         const users = data.rows;
         const templateVars = { user: data.rows[0].email };
         res.render("home", templateVars);
-        //data.rows[0].email
+
         res.json({ users });
       })
       .catch(err => {
@@ -28,7 +31,6 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
 
-    // res.render("home", templateVars);
   });
 
   router.post("/", (req, res) => {
@@ -38,15 +40,9 @@ module.exports = (db) => {
     db.query(`INSERT INTO users (name, email, password)
     VALUES ($1, $2, $3) RETURNING *;`, [body.name, body.email, body.password])
       .then(data => {
-        // user = db.query(`SELECT id FROM users;` ).then(data => {
-        //   console.log("id", data.rows[data.rows.length-1]);
-        // })
         res.cookie("user_id", data.rows[0].id);
         res.json({ user: body });
 
-        //console.log("id", data.rows[0].id);
-
-//if(req.cookies["user_id"])
       })
       .catch(err => {
         console.log(err);
@@ -56,20 +52,6 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/change-password", (req, res) => {
-    console.log("change-passhword+++++++");
-    res.render("index");
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
 
 
   return router;
