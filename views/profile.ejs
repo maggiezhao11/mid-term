@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <title>Resources Update</title>
+    <title>My Profile</title>
   </head>
 
   <body>
@@ -15,9 +15,9 @@
   <%- //include('partials/_header') %>
 
     <main>
-      <h3>Resources Edit</h3>
-      <section class="my-resources-container">
-      <div class="edit-resources">
+      <h3>My Profile</h3>
+      <section class="my-profile-container">
+      <div class="edit-profile">
                 <table class="table">
                   <thead>
                     <tr>
@@ -30,18 +30,16 @@
                     <tr>
                       <td>
                         <ul>
-                          <li>Title: <%= title %></li>
-                          <li>URL: <%= url%></li>
-                          <li>Description: <%= description %></li>
-                          <li>Category: <%= topic %></li>
+                          <li>Name: <%= user.name %></li>
+                          <li>Email: <%= user.email%></li>
                         </ul>
                       </td>
-                      <form method="POST" action="/api/resources/<%=id %>/edit">
+                      <form method="POST" action="/api/profile/<%= user.id %>">
                       <td>
                         <ul>
-                        <li>Title:<input type="text" name="title" value="<%= title %>"> </li>
-                        <li>URL:<input type="text" name="url" value="<%= url%>"> </li>
-                        <li>Description:<input type="text" name="description" value="<%= description %>"> </li>
+                        <li>Name:<input type="text" name="name" value="<%= user.name %>"> </li>
+                        <li>Email:<input type="text" name="email" value="<%= user.email%>"> </li>
+                        <li>Password:<input type="password" name="password" value="<%= user.password %>"> </li>
                         </ul>
                       </td>
                         <td><button type="submit">Edit</button></td>
