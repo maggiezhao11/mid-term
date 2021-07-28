@@ -25,17 +25,29 @@ const resourceRouter = (db) => {
 
 // this require the a specific resource where id is specified;
   router.get('/:id', (req, res) => {
-    db.query(`SELECT name, topic, title,  description, url FROM resources
+    db.query(`SELECT resources.id,  name, topic, title,  description, url, comment, avg(rating) AS rating FROM resources
     JOIN users on resources.owner_id = users.id
     JOIN categories ON resources.category_id = categories.id
+    LEFT JOIN resource_comments ON resource_comments.resource_id = resources.id
+    LEFT JOIN resource_rates ON resource_rates.resource_id = resources.id
     WHERE resources.id = $1
-    GROUP BY name, topic, title, description, url;`, [req.params.id])
+    GROUP BY name, topic, title, description, url, resource_comments.comment, resources.id
+    ;`, [req.params.id])
     .then(queryResult => {
+      // console.log(queryResult.rows)
       const data = queryResult.rows
+      console.log(data)
       const templateVars = {data}
       res.render('resourcesId.ejs', templateVars)
     })
     .catch(err => {console.log(err.message)})
+  })
+
+  router.post('/:id', (req, res) => {
+    const resource_id = req.params.id;
+    const comment = req.body.comment;
+    db.query(`INSERT INTO resource_comments (resource_id, comment) values ($1, $2) RETURNING*`, [resource_id, comment])
+    res.redirect(`/resourses/${resource_id}`)
   })
 
   router.post('/new', (req, res) => {
