@@ -48,6 +48,7 @@ const registerRoutes = require("./routes/register");
 const loginRoutes = require("./routes/login");
 const homeRoutes = require("./routes/home");
 const logoutRoutes = require("./routes/logout");
+const titleSearchRoutes = require("./routes/title_search");
 
 const resourceRoutes = require('./routes/resources')
 const myResourcesRoutes = require("./routes/my_resources");
@@ -58,13 +59,14 @@ const myProfile = require('./routes/my_profile')
 // app.use("/api/users", usersRoutes(db));
 app.use("/api/register", registerRoutes(db));
 app.use("/api/login", loginRoutes(db));
-app.use("/api/", homeRoutes(db));
 app.use("/api/logout", logoutRoutes(db));
+app.use("/api/title_search", titleSearchRoutes(db));
 // app.use("/api/widgets", widgetsRoutes(db));
 
 app.use('/api/resources', resourceRoutes(db));
 app.use("/api/my-resources", myResourcesRoutes(db));
 app.use('/api/profile', myProfile(db));
+app.use("/api/", homeRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 

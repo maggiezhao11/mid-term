@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>title search</title></title>
+  </head>
+
+  <body>
+
+    <%- include('./partials/_header') %>
+
+    <main style="margin: 1em;">
+
+  <h2>
+  Search for Resources by a Keyword for Title
+</h2>
+<form action="/api/title_search" method="POST">
+  <input name="title" placeholder="title" type="text" />
+  <button type="submit"> Submit </button>
+</form>
+    </main>
+
+  </body>
+</html>
