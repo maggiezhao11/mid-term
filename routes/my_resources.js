@@ -8,9 +8,11 @@
 const express = require('express');
 const router  = express.Router();
 
+// create GET route for MY Resources
 const myResources = (db) => {
   router.get("/:user_id", (req, res) => {
-    db.query(`SELECT * FROM resources WHERE resources.owner_id = $1`, [req.params.user_id]) // the name after params is the same one after the /:
+    const userID = req.cookies.user_id;
+    db.query(`SELECT * FROM resources WHERE resources.owner_id = $1`, [userID]) // the name after params is the same one after the /:
       .then(data => {
         const myResources = data.rows;
         console.log("data.rows:++++++++", data.rows);
@@ -29,6 +31,7 @@ const myResources = (db) => {
           .json({ error: err.message });
       });
   });
+
   return router;
 };
 
