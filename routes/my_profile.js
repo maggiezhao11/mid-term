@@ -8,37 +8,16 @@
 const express = require('express');
 const router  = express.Router();
 
-// create GET route for MY Resources
+// create GET route for MY profile
 const myProfile = (db) => {
-  // router.get("/:user_id", (req, res) => {
-  //   db.query(`SELECT * FROM resources WHERE resources.owner_id = $1`, [req.params.user_id]) // the name after params is the same one after the /:
-  //     .then(data => {
-  //       const myResources = data.rows;
-  //       console.log("data.rows:++++++++", data.rows);
-  //       const templateVars = {resources: myResources}
-  //       db.query(`SELECT * FROM user_likes JOIN resources ON resources.id = user_likes.resource_id WHERE user_likes.owner_id = $1`, [req.params.user_id])
-  //     .then(result => {
-  //       console.log("result:----------", result.rows);
-  //       templateVars.user_likes = result.rows
-  //       res.render("my-resources", templateVars);//it should be able to render the same page of "resources" but use filter function to the list.
-
-  //       })
-  //     })
-      // .catch(err => {
-      //   res
-      //     .status(500)
-      //     .json({ error: err.message });
-      // });
-  // });
-
-  router.get("/:user_id/profile", (req, res) => {
-    console.log("cookies:", req.cookies);
-    const userID = req.cookies.id;
-    db.query(`SELECT * FROM users WHERE users.id = $1;`, [userID])
+  router.get("/:user_id", (req, res) => {
+    const userID = req.cookies.user_id;
+    console.log("userID************:", userID);
+    db.query(`SELECT * FROM users WHERE id = $1;`, [userID])
       .then(data =>  {
         const user = data.rows[0];
-        console.log("data.rows++++++: ", user);
-
+        //console.log("data.rows++++++: ", user);
+        res.render("profile", {user})
        })
        .catch(err => {
         res
@@ -48,6 +27,29 @@ const myProfile = (db) => {
 
   })
 
+  router.post("/:user_id", (req, res) => {
+    const userID = req.cookies.user_id;
+    const newName = req.body.name;
+    const newEmail = req.body.email;
+    const newPassword = req.body.password;
+    //const templateVars = {name: newName, email: newEmail, password: newPassword};==>we don't need it at this time.
+    db.query(`UPDATE users
+    SET name = $1, email = $2, password = $3
+    WHERE users.id = $4
+    RETURNING *;`, [newName, newEmail, newPassword, userID])
+      .then(data =>  {
+        const user = data.rows[0];
+        console.log("data.rows++++++: ", user);
+       // res.redirect(`/api/profile/${userID}`) ==> another way to fetch the data after making changes!
+        res.render("profile", {user});
+       })
+       .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+
+  })
 
   return router;
 };

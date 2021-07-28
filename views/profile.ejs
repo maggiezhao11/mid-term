@@ -15,7 +15,7 @@
   <%- //include('partials/_header') %>
 
     <main>
-      <h3>Profile Edit</h3>
+      <h3>My Profile</h3>
       <section class="my-profile-container">
       <div class="edit-profile">
                 <table class="table">
@@ -30,18 +30,16 @@
                     <tr>
                       <td>
                         <ul>
-                          <li>Name: <%= name %></li>
-                          <li>Email: <%= email%></li>
-                          <li>Password: <%= password %></li>
-                          <li>Photo: <%= photo %></li>
+                          <li>Name: <%= user.name %></li>
+                          <li>Email: <%= user.email%></li>
                         </ul>
                       </td>
-                      <form method="POST" action="/<%=id %>/profile">
+                      <form method="POST" action="/api/profile/<%= user.id %>">
                       <td>
                         <ul>
-                        <li>Name:<input type="text" name="name" value="<%= name %>"> </li>
-                        <li>Email:<input type="text" name="email" value="<%= email%>"> </li>
-                        <li>Password:<input type="text" name="password" value="<%= password %>"> </li>
+                        <li>Name:<input type="text" name="name" value="<%= user.name %>"> </li>
+                        <li>Email:<input type="text" name="email" value="<%= user.email%>"> </li>
+                        <li>Password:<input type="password" name="password" value="<%= user.password %>"> </li>
                         </ul>
                       </td>
                         <td><button type="submit">Edit</button></td>

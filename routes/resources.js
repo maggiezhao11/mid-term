@@ -73,8 +73,6 @@ const resourceRouter = (db) => {
     .catch(err => {console.log(err.message)})
   })
 
-<<<<<<< HEAD
-=======
 // create POST route for resource edit
 router.post('/:id/edit' , (req, res) => {
   const newTitle = req.body.title
@@ -101,9 +99,6 @@ router.post('/:id/edit' , (req, res) => {
   })
   .catch(err => {console.log(err.message)})
 })
-
->>>>>>> midtermmaggiework
-
   return router
 };
 
