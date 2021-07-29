@@ -3,11 +3,6 @@ require('dotenv').config();
 
 var cookieParser = require('cookie-parser')
 
-
-
-
-
-
 // Web server config
 const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
@@ -58,13 +53,13 @@ const myProfile = require('./routes/my_profile')
 // app.use("/api/users", usersRoutes(db));
 app.use("/api/register", registerRoutes(db));
 app.use("/api/login", loginRoutes(db));
-app.use("/api/", homeRoutes(db));
 app.use("/api/logout", logoutRoutes(db));
 // app.use("/api/widgets", widgetsRoutes(db));
 
 app.use('/api/resources', resourceRoutes(db));
 app.use("/api/my-resources", myResourcesRoutes(db));
 app.use('/api/profile', myProfile(db));
+app.use("/api/", homeRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 

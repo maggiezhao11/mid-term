@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" referrerpolicy="no-referrer"  />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script type="text/javascript" src="/scripts/app.js"></script>
+
+  <title>Resource Show</title>
+</head>
+
+<body>
+  <h3>RESOURCE DETAILS</h3>
+
+  <% for (const item of data) {%>
+    <article class="resource">
+      <div id="resource">
+        <ul>
+          <li>Title: <%= item.title %>  </li>
+          <li>URL: <%= item.url %> </li>
+          <li>Description: <%= item.description %> </li>
+          <li>Category: <%= item.topic %> </li>
+          <li>Comment: <%= item.comments%> </li>
+          <li>Rate: <%= item.rating %>  </li>
+        </ul>
+      </div>
+      <footer>
+        <div class="footer-display">
+          <div class="icon">
+            <i class="fas fa-flag"></i>
+            <i class="fas fa-retweet"></i>
+            <i id="like" class="fas fa-heart"></i>
+          </div>
+        </div>
+      </footer>
+    </article>
+    <%}%>
+
+    <h3> RATE </h3>
+     <section class="new-rate">
+      <form id="rate-input">
+        <textarea
+        class="text-area"
+        placeholder="pls rate!"
+        name="rating"
+        id="rating-text"
+        ></textarea>
+        <div>
+          <button type="submit">submit</button>
+        </div>
+      </form>
+    </section>
+
+    <h3> NEW COMMENT </h3>
+    <section class="new-comment">
+      <form id="comment-input">
+        <textarea
+        class="text-area"
+        placeholder="What are you thinking about?"
+        name="comment"
+        id="comment-text"
+        ></textarea>
+        <div>
+          <button type="submit">submit</button>
+        </div>
+      </form>
+    </section>
+
+
+    <h3> AVAILABLE COMMENTS LIST </h3>
+
+    <div class="comments-list"> </div>
+
+    <!-- <section id="comments">
+    <article class="comments">
+      <header class="comments-header">
+        <div class="tweets-header-left">
+          <span>user name</span>
+        </div>
+        <div class="category">
+          <span>topic</span>
+          </div>
+      </header>
+      <div class="text">comments</div>
+    </article>
+  </section> -->
+
+</body>
+</html>
