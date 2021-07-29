@@ -4,17 +4,24 @@ const router = express.Router();
 
 const resourceRouter = (db) => {
   router.get('/', (req, res) => {
-    const user = req.cookies.user_id
+    const userId = req.cookies.user_id
     db.query(`
-    SELECT resources.id,name, topic, title,  description, url FROM resources
+    SELECT resources.id, name, topic, title,  description, url FROM resources
     JOIN users on resources.owner_id = users.id
     JOIN categories ON resources.category_id = categories.id
     GROUP BY name, topic, title, description, url, resources.id;
     `)
     .then(queryResult => {
       const data = queryResult.rows
-      const templateVars = {data, user}
-      res.render('resources.ejs', templateVars)
+      db.query(`SELECT * FROM users WHERE id = $1`, [userId])
+      .then((user) => {
+        user = user.rows[0];
+        console.log("line18 user:", user)
+        user = user.name
+        const templateVars = {data, user}
+        //console.log("line 17 data:", data);
+        res.render('resources.ejs', templateVars)
+      })
     })
     .catch(err => {console.log(err.message)})
   })
@@ -27,7 +34,7 @@ const resourceRouter = (db) => {
 
 // this query extract a specific resource where id is specified;
   router.get('/:id', (req, res) => {
-    db.query(`SELECT name, topic, title,  description, url, ARRAY_AGG(resource_comments.comment) AS comments, AVG(resource_rates.rating) AS rating FROM resources
+    db.query(`SELECT name, topic, title,  description, url, resource_comments.comment AS comments, AVG(resource_rates.rating) AS rating FROM resources
     JOIN users on resources.owner_id = users.id
     JOIN categories ON resources.category_id = categories.id
     LEFT JOIN resource_comments ON resources.id = resource_comments.resource_id
@@ -36,25 +43,26 @@ const resourceRouter = (db) => {
     GROUP BY name, topic, title, description, url, resource_comments.comment, resources.id
     ;`, [req.params.id])
     .then(queryResult => {
-      const data = queryResult.rows
-      console.log("===============",data)
-      const templateVars = {data}
-      console.log("data:", data)
-      res.render('resource_show.ejs', templateVars)
+      const data = queryResult.rows[0]; // get the particular resource info from db at index [0] of data array of objects.
+      console.log("line47:", data)
+      // const templateVars = {data}
+      res.render('resource_show.ejs', data)
     })
     .catch(err => {console.log(err.message)})
-
   })
+
+
   router.get('/:id/comment', (req, res) => {
     //return comment / name / category
     const resourceID = req.params.id;
+    const userID = req.cookies.user_id;
     db.query(`
     SELECT name, topic, resource_comments.comment AS comments FROM resources
-    JOIN users on resources.owner_id = users.id
     JOIN categories ON resources.category_id = categories.id
     LEFT JOIN resource_comments ON resources.id = resource_comments.resource_id
+    JOIN users on resource_comments.owner_id = users.id
     WHERE resources.id = $1;
-    ;`, [resourceID])
+    `, [resourceID])
     .then(queryResult => {
       const data = queryResult.rows
       const templateVars = {data}
@@ -64,6 +72,7 @@ const resourceRouter = (db) => {
     })
     .catch(err => {console.log(err.message)})
   });
+
 
   router.post('/:id/rate', (req, res) => {
     console.log("rate path");
@@ -88,9 +97,10 @@ const resourceRouter = (db) => {
     //return resource details
     const userID = req.cookies.user_id;
     const resourceID = req.params.id;
+
     db.query(`
     INSERT INTO user_likes (resource_id, owner_id)
-    VALUEs ($1, $2)
+    VALUES ($1, $2)
     RETURNING *;`, [resourceID, userID])
     .then(queryResult => {
       const data = queryResult.rows
@@ -130,9 +140,7 @@ const resourceRouter = (db) => {
     GROUP BY name, topic, title, description, url;`, [req.params.id])
     .then(queryResult => {
       const data = queryResult.rows
-      // const templateVars = {data}
-      // res.render('resources.ejs', templateVars)
-      console.log("data:", data)
+      console.log("fetch data line 136:", data)
       // return res.status(200).send(data);
       return res.json(data);
     })
@@ -144,32 +152,23 @@ const resourceRouter = (db) => {
 
 
 
-//create post route for resources/new
+  // create post route for resources/new
+  // in order to have category ID while insert information into resource, we will need to get value of category ID for new resource first.
   router.post('/new', (req, res) => {
-    console.log("anything")
     const arr = []
-
     db.query(`INSERT INTO categories (topic) VALUES ($1) RETURNING id`, [req.body.category]).then((results) => {
       const title = req.body.title;
       const url = req.body.url;
       const description = req.body.description;
       arr.push(title, url, description)
-      console.log(arr)
-
       const category_id = results.rows[0].id
-      console.log(category_id);
       arr.push(category_id)
       const user_id = req.cookies.user_id;
       arr.push(user_id)
-      console.log("arrrrrrrrrrr: ",arr)
       return db.query(`INSERT INTO resources  (title, url, description, category_id, owner_id) VALUES ($1, $2, $3, $4, $5)`, arr);
-
     }).then(() => {
-
       res.redirect('/api/resources')
     })
-
-
   })
 
   router.post('/:id', (req, res) => {
@@ -214,8 +213,6 @@ router.post('/:id/edit' , (req, res) => {
     GROUP BY resources.id, name, topic, title, description, url;`, [resourceId])
     .then((queryResult) => {
       const data = queryResult.rows[0]
-      console.log("templateVars++++++++++++:", templateVars);
-      console.log("data++++++++++++:", data);
       res.render('edit-resource', data)
     })
   })
