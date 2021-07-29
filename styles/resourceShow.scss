@@ -1,0 +1,59 @@
+body {
+    background-color:#f4f1ec;
+}
+h3 {
+    display: flex;
+    justify-content: center;
+}
+.resource{
+    border: solid black 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px 0 20px;
+    border-radius: 30px;
+}
+.resource:hover{
+    box-shadow: black 0.25em 0.25em;
+}
+#rate-input {
+    // border: black solid 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.text-area{
+    border: none;
+    border-bottom: black solid 5px;
+    background-color: #f4f1ec;
+}
+.btn-submit{
+    cursor: pointer;
+}
+.btn-submit:hover{
+    border: solid black 2px;
+}
+.new-comment{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.btn-comment{
+    position: relative;
+    left: 43px;
+}
+.tweets{
+    border: black solid 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin: 0 100px 0 100px;
+    border-radius: 30px;
+
+}

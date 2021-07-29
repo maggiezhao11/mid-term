@@ -162,12 +162,14 @@ const resourceRouter = (db) => {
       const user_id = req.cookies.user_id;
       arr.push(user_id)
       console.log("arrrrrrrrrrr: ",arr)
-      db.query(`INSERT INTO resources  (title, url, description, category_id, owner_id) VALUES ($1, $2, $3, $4, $5)`, arr);
+      return db.query(`INSERT INTO resources  (title, url, description, category_id, owner_id) VALUES ($1, $2, $3, $4, $5)`, arr);
 
+    }).then(() => {
+
+      res.redirect('/api/resources')
     })
 
 
-    res.redirect('/api/resources')
   })
 
   router.post('/:id', (req, res) => {
