@@ -49,6 +49,7 @@ const loginRoutes = require("./routes/login");
 const homeRoutes = require("./routes/home");
 const logoutRoutes = require("./routes/logout");
 const titleSearchRoutes = require("./routes/title_search");
+const topicSearchRoutes = require("./routes/topic_search");
 
 const resourceRoutes = require('./routes/resources')
 const myResourcesRoutes = require("./routes/my_resources");
@@ -61,6 +62,7 @@ app.use("/api/register", registerRoutes(db));
 app.use("/api/login", loginRoutes(db));
 app.use("/api/logout", logoutRoutes(db));
 app.use("/api/title_search", titleSearchRoutes(db));
+app.use("/api/topic_search", topicSearchRoutes(db));
 // app.use("/api/widgets", widgetsRoutes(db));
 
 app.use('/api/resources', resourceRoutes(db));
