@@ -20,16 +20,19 @@
 <body>
   <h3>RESOURCE DETAILS</h3>
 
-  <% for (const item of data) {%>
     <article class="resource">
       <div id="resource">
         <ul>
-          <li>Title: <%= item.title %>  </li>
-          <li>URL: <%= item.url %> </li>
-          <li>Description: <%= item.description %> </li>
-          <li>Category: <%= item.topic %> </li>
-          <li>Comment: <%= item.comments%> </li>
-          <li>Rate: <%= item.rating %>  </li>
+          <li>Title: <%= title %>  </li>
+          <li>URL: <%= url %> </li>
+          <li>Description: <%= description %> </li>
+          <li>Category: <%= topic %> </li>
+          <li>Comment: <%= comments%> </li>
+          <% if (rating) { %>
+            <li>Rate: <%= rating.toFixed(2) %>  </li>
+          <%} else { %>
+            <li>Rate: No Rating available, pls share your rate! </li>
+          <%} %>
         </ul>
       </div>
       <footer>
@@ -42,7 +45,7 @@
         </div>
       </footer>
     </article>
-    <%}%>
+
 
     <h3> RATE </h3>
      <section class="new-rate">

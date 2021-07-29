@@ -18,6 +18,7 @@ $(() => {
   // console.log("resourceID:", resourceID);
   // console.log("window.location:", window.location);
   const createComment = function(data) {
+    console.log("line 21:", data);
     const {name, topic, comments} = data;
     let $comment = `
   <article class="tweets">
@@ -63,13 +64,22 @@ $(() => {
     const data = $formRate.serialize();
     const resourceID = window.location.pathname.substr(15, window.location.pathname.length - 15)
     $.post(`/api/resources/${resourceID}/rate`, data)
-      .then((data) => {
-
-        console.log("data after add rate:", data);
-
-        fetchComments();
+      .then(() => {
+        //console.log("data after add rate:", data);
+        fetchRates();
       });
   })
+
+  const fetchRates = () => {
+    const resourceID = window.location.pathname.substr(15, window.location.pathname.length - 15)
+    $.get(`/api/resources/fetch/${resourceID}`)
+      .then((data) => {
+        console.log("fetch resources:", data);
+        $('#resource ul li:last-of-type').text(data[0].rating.toFixed(2));
+      })
+  }
+
+
   //create form
   //create event handler
   //check post route (into db)
