@@ -13,7 +13,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
   <link rel="stylesheet" href="/styles/resourceShow.css">
-
   <title>Resource Show</title>
 </head>
 
@@ -26,8 +25,8 @@
           <li>Title: <%= title %>  </li>
           <li>URL: <%= url %> </li>
           <li>Description: <%= description %> </li>
+          <li>comment: <%= comments %> </li>
           <li>Category: <%= topic %> </li>
-          <li>Comment: <%= comments%> </li>
           <% if (rating) { %>
             <li>Rate: <%= rating.toFixed(2) %>  </li>
           <%} else { %>

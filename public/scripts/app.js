@@ -55,8 +55,11 @@ $(() => {
       .then(() => {
         console.log('all done');
         //fetchComments(); //==>should fetch the whole page
-      });
-  })
+      })
+      $(event.target).toggleClass('redBackground');
+      //console.log("event.target:", $(event.target));
+    })
+
 
   const $formRate = $('#rate-input')
   $formRate.submit((event) => {
