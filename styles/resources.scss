@@ -1,0 +1,48 @@
+body {
+	background-color: #f4f1ec;
+}
+.resource-section {
+	border: solid black 4px;
+	margin: 8px;
+	height: 220px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.resource-section:hover {
+	box-shadow: black 0.25em 0.25em;
+}
+.post-header {
+	display: flex;
+	justify-content: space-between;
+	margin: 8px;
+}
+.body-div {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	height: 120px;
+	margin: 8px;
+
+}
+.a-url {
+	text-decoration: none;
+	color: black;
+}
+.btn-div {
+	width: 100%;
+	// border: black solid 2px;
+	display: flex;
+	justify-content: center;
+}
+.btn-details {
+	cursor: pointer;
+	height: 35px;
+	background-color: #fff;
+	border: solid black 0.01rem;
+}
+.btn-details:hover {
+	border: black solid 3px;
+	height: 45px;
+}
