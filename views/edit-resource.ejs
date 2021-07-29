@@ -6,13 +6,13 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/edit-resource.css">
 
     <title>Resources Update</title>
   </head>
 
   <body>
 
-  <%- //include('partials/_header') %>
 
     <main>
       <h3>Resources Edit</h3>
@@ -37,14 +37,14 @@
                         </ul>
                       </td>
                       <form method="POST" action="/api/resources/<%=id %>/edit">
-                      <td>
+                      <td class="new-detail">
                         <ul>
                         <li>Title:<input type="text" name="title" value="<%= title %>"> </li>
                         <li>URL:<input type="text" name="url" value="<%= url%>"> </li>
                         <li>Description:<input type="text" name="description" value="<%= description %>"> </li>
                         </ul>
                       </td>
-                        <td><button type="submit">Edit</button></td>
+                      <td><button class="btn-edit" type="submit">Edit</button></td>
                       </form>
                     </tr>
                   </tbody>

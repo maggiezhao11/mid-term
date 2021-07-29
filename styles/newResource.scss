@@ -1,0 +1,40 @@
+body {
+	background-color: #f4f1ec;
+}
+.section-new {
+display: flex;
+justify-content: center;
+// border: solid black 2px;
+margin: 10px;
+height: 240px;
+}
+.div-new {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 340px;
+    // border: solid black 2px;
+}
+input {
+    margin: 5px;
+    width: 260px;
+}
+.description {
+    width: 540px;
+}
+.btn-post {
+	cursor: pointer;
+	background-color: #fff;
+    width: 50px;
+    height: 30px;
+}
+.btn-post:hover {
+    width: 60px;
+    height: 40px;
+	border: black solid 3px;
+}
+h3 {
+    display: flex;
+    justify-content: center;
+}
