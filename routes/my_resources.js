@@ -19,7 +19,9 @@ const myResources = (db) => {
         // console.log("data.rows:++++++++", data.rows);
         const templateVars = { resources: myResources };
         db.query(
-          `SELECT * FROM resources JOIN user_likes ON resources.id=user_likes.resource_id WHERE user_likes.owner_id = $1;`,
+          // `SELECT * FROM resources JOIN user_likes ON resources.id=user_likes.resource_id WHERE user_likes.owner_id = $1;`, ==> original way to deal with, because we did duplication before, so incase could be show in just one result, make them group by. ==> after setting checking exist condition in like function, don't need this group by afterwards.
+          `SELECT user_likes.resource_id, user_likes.owner_id, title, url, description, category_id, resources.id  FROM user_likes JOIN resources ON resources.id=user_likes.resource_id WHERE user_likes.owner_id = $1
+          GROUP BY user_likes.resource_id, user_likes.owner_id, resources.title, resources.url, resources.description, resources.category_id, resources.id;`,
           [userID])
         .then((result) => {
           //console.log("result:----------", result.rows);

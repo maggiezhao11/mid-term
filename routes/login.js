@@ -22,7 +22,7 @@ module.exports = (db) => {
         console.log("password", data);
         if(data.rows[0].password === body.password) {
           res.cookie("user_id", data.rows[0].id);
-          res.redirect("/api");
+          res.redirect("/api/resources");
         } else {
           res
           .status(401)

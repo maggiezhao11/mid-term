@@ -30,7 +30,6 @@
           <li>Title: <%= data.title %>  </li>
           <li>URL: <%= data.url %> </li>
           <li>Description: <%= data.description %> </li>
-          <li>comment: <%= data.comments %> </li>
           <li>Category: <%= data.topic %> </li>
           <% if (data.rating) { %>
             <li>Rate: <%= data.rating.toFixed(2) %>  </li>
@@ -42,8 +41,12 @@
       <footer class="footer-icons">
         <div class="footer-display">
           <div class="icon">
-            <i class="fas fa-flag"></i>
-            <i class="fas fa-retweet"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="fas fa-edit"></i>
             <i id="like" class="fas fa-heart"></i>
           </div>
         </div>
