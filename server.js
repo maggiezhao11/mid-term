@@ -3,11 +3,6 @@ require('dotenv').config();
 
 var cookieParser = require('cookie-parser')
 
-
-
-
-
-
 // Web server config
 const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
@@ -78,7 +73,7 @@ app.use("/api/", homeRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("welcome");
 });
 
 //this page either presents the registeration form if notregistered

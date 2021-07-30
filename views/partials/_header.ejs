@@ -3,49 +3,33 @@
     <a style="text-decoration: none" class="navbar-brand" href="/api">Rsources Wall</a>
 
 
-    <% if(userEmail){%>
-      <div>
-        <label>logged in as <%= userEmail %></label>
-      </div>
-
-      <div>
-        <form method="POST" action="/api/logout">
-          <button
-                    type="submit">
-                logout
-            </button>
-        </form>
-      </div>
-
-      <div>
-        <form method="GET" action="/api/topic_search">
-          <button
-                    type="submit">
-                Search by Topic
-            </button>
-        </form>
-      </div>
-
-      <div>
-        <form method="GET" action="/api/my-resources">
-          <button
-                    type="submit">
-                My Resources
-            </button>
-        </form>
-      </div>
-
-      <div>
-        <form method="GET" action="/api/resources/new">
-          <button
-                    type="submit">
-                Create New
-            </button>
-        </form>
-      </div>
-
-      <div>
-        <form method="GETT" action="/api/profile">
+    <% if(user){%>
+      <label>logged in as <%= user.name %></label>
+      <form method="POST" action="/api/logout">
+        <button
+                  type="submit">
+              logout
+          </button>
+      </form>
+      <form method="GET" action="/api/topic_search">
+        <button
+                  type="submit">
+              Search by Topic
+          </button>
+      </form>
+      <form method="" action="">
+        <button
+                  type="submit">
+              My Resources
+          </button>
+      </form>
+      <form method="" action="">
+        <button
+                  type="submit">
+              Create New
+          </button>
+      </form>
+      <form method="" action="">
         <button
                   type="submit">
               Profile
