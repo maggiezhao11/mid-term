@@ -10,14 +10,14 @@ const router  = express.Router();
 
 // create GET route for MY profile
 const myProfile = (db) => {
-  router.get("/:user_id", (req, res) => {
+  router.get("/", (req, res) => {
     const userID = req.cookies.user_id;
     console.log("userID************:", userID);
     db.query(`SELECT * FROM users WHERE id = $1;`, [userID])
       .then(data =>  {
         const user = data.rows[0];
         //console.log("data.rows++++++: ", user);
-        res.render("profile", {user})
+        res.render("profile", {user: user})
        })
        .catch(err => {
         res
@@ -41,7 +41,7 @@ const myProfile = (db) => {
         const user = data.rows[0];
         console.log("data.rows++++++: ", user);
        // res.redirect(`/api/profile/${userID}`) ==> another way to fetch the data after making changes!
-        res.render("profile", {user});
+        res.render("profile", {user: user});
        })
        .catch(err => {
         res

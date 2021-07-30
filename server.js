@@ -51,9 +51,10 @@ const logoutRoutes = require("./routes/logout");
 const titleSearchRoutes = require("./routes/title_search");
 const topicSearchRoutes = require("./routes/topic_search");
 
-const resourceRoutes = require('./routes/resources')
+
+const resourceRoutes = require('./routes/resources');
 const myResourcesRoutes = require("./routes/my_resources");
-const myProfile = require('./routes/my_profile')
+const myProfile = require('./routes/my_profile');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -68,6 +69,7 @@ app.use("/api/topic_search", topicSearchRoutes(db));
 app.use('/api/resources', resourceRoutes(db));
 app.use("/api/my-resources", myResourcesRoutes(db));
 app.use('/api/profile', myProfile(db));
+
 app.use("/api/", homeRoutes(db));
 // Note: mount other resources here, using the same pattern above
 

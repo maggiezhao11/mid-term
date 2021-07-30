@@ -75,7 +75,7 @@ const resourceRouter = (db) => {
     const user_id = req.cookies.user_id
     const resource_id = req.params.id;
     const comment = req.body.comment;
-    db.query(`INSERT INTO resource_comments (resource_id, comment, owner_id) values ($1, $2, $3) RETURNING*`, [resource_id, comment, user_id])
+    db.query(`INSERT INTO resource_comments (resource_id, comment, owner_id) values ($1, $2, $3) RETURNING *`, [resource_id, comment, user_id])
     res.redirect(`/resources/${resource_id}`)
   })
 // create GET route for resource edit

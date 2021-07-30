@@ -1,49 +1,70 @@
 <header>
   <nav class="navbar navbar-expand-md navbar-dark bg-success">
-    <a class="navbar-brand" href="/api">Rsources Wall</a>
+    <a style="text-decoration: none" class="navbar-brand" href="/api">Rsources Wall</a>
 
 
-    <% if(user){%>
-      <label>logged in as <%= user %></label>
-      <form method="POST" action="/api/logout">
-        <button
-                  type="submit">
-              logout
-          </button>
-      </form>
-      <form method="GET" action="/api/topic_search">
-        <button
-                  type="submit">
-              Search by Topic
-          </button>
-      </form>
-      <form method="" action="">
-        <button
-                  type="submit">
-              My Resources
-          </button>
-      </form>
-      <form method="" action="">
-        <button
-                  type="submit">
-              Create New
-          </button>
-      </form>
-      <form method="" action="">
+    <% if(userEmail){%>
+      <div>
+        <label>logged in as <%= userEmail %></label>
+      </div>
+
+      <div>
+        <form method="POST" action="/api/logout">
+          <button
+                    type="submit">
+                logout
+            </button>
+        </form>
+      </div>
+
+      <div>
+        <form method="GET" action="/api/topic_search">
+          <button
+                    type="submit">
+                Search by Topic
+            </button>
+        </form>
+      </div>
+
+      <div>
+        <form method="GET" action="/api/my-resources">
+          <button
+                    type="submit">
+                My Resources
+            </button>
+        </form>
+      </div>
+
+      <div>
+        <form method="GET" action="/api/resources/new">
+          <button
+                    type="submit">
+                Create New
+            </button>
+        </form>
+      </div>
+
+      <div>
+        <form method="GETT" action="/api/profile">
         <button
                   type="submit">
               Profile
           </button>
       </form>
-      <form method="GET" action="/api/title_search">
-        <button
-                  type="submit">
-              Search by Title
-          </button>
-      </form>
+      </div>
 
-    <% } else{ %>  <a href="http://localhost:8080/api/register">go here to register</a>
-    <a href="http://localhost:8080/api/login">go here to log in</a>
+      <div>
+        <form method="GET" action="/api/title_search">
+          <button
+                    type="submit">
+                Search by Title
+            </button>
+        </form>
+      </div>
+
+
+    <% } else{ %>  <a style="text-decoration: none"  href="http://localhost:8080/api/register">Go Here to Register</a>
+    <a style="text-decoration: none"  href="http://localhost:8080/api/login">Go Here to Log in</a>
 
    <% } %>
 

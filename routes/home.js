@@ -18,7 +18,8 @@ module.exports = (db) => {
 
     db.query(`SELECT * FROM users WHERE id = $1;`, [req.cookies["user_id"]])
       .then(data => {
-        const templateVars = { user: data.rows[0].email };
+        const templateVars = { userEmail: data.rows[0].email };
+        console.log("check&&&&&&&&&&&&&&", templateVars);
         res.render("home", templateVars);
       })
       .catch(err => {
