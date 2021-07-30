@@ -12,7 +12,7 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users WHERE id = $1;`, [req.cookies["user_id"]])
       .then(result => {
-        const templateVars = { userEmail: result.rows[0].email };
+        const templateVars = { user: result.rows[0] };
         res.render("topic_search", templateVars);
       })
       .catch(err => {
@@ -37,7 +37,7 @@ module.exports = (db) => {
 
         db.query(`SELECT * FROM users WHERE id = $1;`, [req.cookies["user_id"]])
       .then(result => {
-        const templateVars = { resources: resources, userEmail: result.rows[0].email };
+        const templateVars = { resources: resources, user: result.rows[0] };
         res.render("topics", templateVars);
       })
       .catch(err => {

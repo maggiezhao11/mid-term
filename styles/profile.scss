@@ -39,3 +39,15 @@ input {
     border-bottom: solid black 5px;
     background-color: #f4f1ec;
 }
+
+nav {
+  height: 100px;
+  background-color: #cccc00;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  a {
+    border: none;
+  }
+}

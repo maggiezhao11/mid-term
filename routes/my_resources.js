@@ -11,10 +11,7 @@ const router = express.Router();
 // create GET route for MY Resources
 const myResources = (db) => {
   router.get("/", (req, res) => {
-<<<<<<< HEAD
-=======
     // ***"/:id" we only need to put :id in the routes path for params not for cookies
->>>>>>> master
     const userID = req.cookies.user_id;
     db.query(`SELECT * FROM resources WHERE resources.owner_id = $1`, [userID]) // the name after params is the same one after the /:
       .then((data) => {
