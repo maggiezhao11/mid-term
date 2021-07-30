@@ -55,5 +55,20 @@ h3 {
     padding: 5px;
     margin: 0 100px 0 100px;
     border-radius: 30px;
-
+    margin-bottom: 8px;
+    height: 100px;
 }
+.tweets-header{
+    width: 850px;
+    display: flex;
+    justify-content: space-between;
+}
+.text{
+    // border: solid black 2px
+    padding-top: 35px;
+    width: 750px;
+}
+.redBackground {
+    color: red;
+    cursor: pointer;
+  }

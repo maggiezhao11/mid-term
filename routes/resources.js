@@ -102,23 +102,33 @@ const resourceRouter = (db) => {
     .catch(err => {console.log(err.message)})
   });
 
-
+// rows: [{exists: false}]
   router.post('/:id/like', (req, res) => {
     console.log("like path");
     //return resource details
     const userID = req.cookies.user_id;
     const resourceID = req.params.id;
+    db.query(`SELECT EXISTS (SELECT 1 FROM user_likes WHERE resource_id = $1 AND owner_id = $2)`, [resourceID, userID])
+    .then((queryResult) => {
+      return queryResult.rows[0].exists
+    }).then((exists) => {
+      console.log("exists",exists);
+      if (exists) {
+        return db.query(`delete from user_likes WHERE resource_id = $1 AND owner_id = $2 RETURNING*`, [resourceID, userID])
+      }
+      return db.query(`
+      INSERT INTO user_likes (resource_id, owner_id)
+      VALUES ($1, $2)
+      RETURNING *;`, [resourceID, userID])
 
-    db.query(`
-    INSERT INTO user_likes (resource_id, owner_id)
-    VALUES ($1, $2)
-    RETURNING *;`, [resourceID, userID])
+    })
     .then(queryResult => {
       const data = queryResult.rows
       res.json(data);
     })
     .catch(err => {console.log(err.message)})
   });
+
 
   router.post('/fetch/:id', (req, res) => {
     const userID = req.cookies.user_id;
