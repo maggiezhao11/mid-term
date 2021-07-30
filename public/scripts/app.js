@@ -63,6 +63,7 @@ $(() => {
 
   const $formRate = $('#rate-input')
   $formRate.submit((event) => {
+    console.log('Helloworld');
     event.preventDefault();
     const data = $formRate.serialize();
     const resourceID = window.location.pathname.substr(15, window.location.pathname.length - 15)
