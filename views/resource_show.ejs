@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
@@ -17,18 +18,22 @@
 </head>
 
 <body>
+
+  <%-include('partials/_header') %>
+
+  <main>
   <h3>RESOURCE DETAILS</h3>
 
     <article class="resource">
       <div id="resource">
         <ul>
-          <li>Title: <%= title %>  </li>
-          <li>URL: <%= url %> </li>
-          <li>Description: <%= description %> </li>
-          <li>comment: <%= comments %> </li>
-          <li>Category: <%= topic %> </li>
-          <% if (rating) { %>
-            <li>Rate: <%= rating.toFixed(2) %>  </li>
+          <li>Title: <%= data.title %>  </li>
+          <li>URL: <%= data.url %> </li>
+          <li>Description: <%= data.description %> </li>
+          <li>comment: <%= data.comments %> </li>
+          <li>Category: <%= data.topic %> </li>
+          <% if (data.rating) { %>
+            <li>Rate: <%= data.rating.toFixed(2) %>  </li>
           <%} else { %>
             <li>Rate: No Rating available, pls share your rate! </li>
           <%} %>
@@ -81,19 +86,11 @@
 
     <div class="comments-list"> </div>
 
-    <!-- <section id="comments">
-    <article class="comments">
-      <header class="comments-header">
-        <div class="tweets-header-left">
-          <span>user name</span>
-        </div>
-        <div class="category">
-          <span>topic</span>
-          </div>
-      </header>
-      <div class="text">comments</div>
-    </article>
-  </section> -->
+  </main>
+      <!-- Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 </html>

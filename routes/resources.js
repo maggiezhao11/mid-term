@@ -17,7 +17,6 @@ const resourceRouter = (db) => {
       .then((user) => {
         user = user.rows[0];
         console.log("line18 user:", user)
-        user = user.name
         const templateVars = {data, user}
         //console.log("line 17 data:", data);
         res.render('resources.ejs', templateVars)
@@ -27,13 +26,18 @@ const resourceRouter = (db) => {
   })
   // create new url
   router.get('/new', (req, res) => {
-    const user = req.cookies.user_id
-    res.render('newResource', {user});
+    const userId = req.cookies.user_id
+    db.query(`SELECT * FROM users WHERE id = $1`, [userId])
+    .then((user) => {
+      user = user.rows[0]
+      res.render('newResource', {user});
+    })
   })
 
 
 // this query extract a specific resource where id is specified;
   router.get('/:id', (req, res) => {
+    const userId = req.cookies.user_id
     db.query(`SELECT name, topic, title,  description, url, resource_comments.comment AS comments, AVG(resource_rates.rating) AS rating FROM resources
     JOIN users on resources.owner_id = users.id
     JOIN categories ON resources.category_id = categories.id
@@ -44,9 +48,16 @@ const resourceRouter = (db) => {
     ;`, [req.params.id])
     .then(queryResult => {
       const data = queryResult.rows[0]; // get the particular resource info from db at index [0] of data array of objects.
-      console.log("line47:", data)
+      //console.log("line47:", data)
       // const templateVars = {data}
-      res.render('resource_show.ejs', data)
+      db.query(`SELECT * FROM users WHERE id = $1`, [userId])
+      .then((user) => {
+        user = user.rows[0];
+        console.log("user*********", user)
+        const templateVars = {data, user}
+        console.log("templateVars----------:", templateVars)
+        res.render('resource_show.ejs', templateVars)
+      })
     })
     .catch(err => {console.log(err.message)})
   })
@@ -180,17 +191,24 @@ const resourceRouter = (db) => {
   })
 // create GET route for resource edit
   router.get('/:id/edit' , (req, res) => {
+    const userId = req.cookies.user_id
+    const resourceId = req.params.id
     db.query(`SELECT resources.id, name, topic, title,  description, url FROM resources
     JOIN users on resources.owner_id = users.id
     JOIN categories ON resources.category_id = categories.id
     WHERE resources.id = $1
-    GROUP BY resources.id, name, topic, title, description, url;`, [req.params.id])
+    GROUP BY resources.id, name, topic, title, description, url;`, [resourceId])
     .then(queryResult => {
     const data = queryResult.rows[0]
     //const templateVars = {...data} ==> how to store everything from data to templateVars
     //console.log("templateVars:", templateVars);
-    res.render('edit-resource', data)
+    db.query(`SELECT * FROM users WHERE id = $1`, [userId])
+    .then((user) => {
+      user = user.rows[0];
+      const templateVars = {data, user}
+      res.render('edit-resource', templateVars)
     })
+  })
     .catch(err => {console.log(err.message)})
   })
 

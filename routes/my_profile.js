@@ -16,7 +16,7 @@ const myProfile = (db) => {
     db.query(`SELECT * FROM users WHERE id = $1;`, [userID])
       .then(data =>  {
         const user = data.rows[0];
-        //console.log("data.rows++++++: ", user);
+        console.log("data.rows++++++: ", user);
         res.render("profile", {user})
        })
        .catch(err => {
