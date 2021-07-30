@@ -6,13 +6,14 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/edit-resource.css">
 
     <title>Resources Update</title>
   </head>
 
   <body>
 
-  <%- //include('partials/_header') %>
+    <%-include('partials/_header') %>
 
     <main>
       <h3>Resources Edit</h3>
@@ -30,21 +31,23 @@
                     <tr>
                       <td>
                         <ul>
-                          <li>Title: <%= title %></li>
-                          <li>URL: <%= url%></li>
-                          <li>Description: <%= description %></li>
-                          <li>Category: <%= topic %></li>
+                          <li>Title: <%= data.title %></li>
+                          <li>URL: <%= data.url%></li>
+                          <li>Description: <%= data.description %></li>
+                          <li>Category: <%= data.topic %></li>
                         </ul>
                       </td>
-                      <form method="POST" action="/api/resources/<%=id %>/edit">
-                      <td>
+                      <form method="POST" action="/api/resources/<%=data.id %>/edit">
+
+                      <td class="new-detail">
                         <ul>
-                        <li>Title:<input type="text" name="title" value="<%= title %>"> </li>
-                        <li>URL:<input type="text" name="url" value="<%= url%>"> </li>
-                        <li>Description:<input type="text" name="description" value="<%= description %>"> </li>
+                        <li>Title:<input type="text" name="title" value="<%= data.title %>"> </li>
+                        <li>URL:<input type="text" name="url" value="<%= data.url%>"> </li>
+                        <li>Description:<input type="text" name="description" value="<%= data.description %>"> </li>
+                        <li><input type="hidden" name="id" value="<%= data.id %>"></li>
                         </ul>
                       </td>
-                        <td><button type="submit">Edit</button></td>
+                      <td><button class="btn-edit" type="submit">Edit</button></td>
                       </form>
                     </tr>
                   </tbody>

@@ -1,0 +1,47 @@
+body {
+    background-color:  #f4f1ec;
+}
+h3 {
+    display: flex;
+    justify-content: center;
+}
+.edit-resources {
+    position: relative;
+    left: 60px;
+    width: 900px;
+}
+.my-profile-container {
+    display: flex;
+    justify-content: center;
+}
+.new-detail ul li {
+    display: flex;
+    flex-direction: column;
+}
+.btn-edit {
+	cursor: pointer;
+	background-color: #fff;
+    width: 50px;
+    height: 30px;
+    position: relative;
+    top: 175px;
+    right: 325px;
+}
+.btn-edit:hover {
+    width: 52px;
+    height: 32px;
+	border: black solid 3px;
+}
+input {
+    border: none;
+    border-bottom: solid black 5px;
+    background-color: #f4f1ec;
+    width: 520px;
+}
+// #comments{
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+
+// }

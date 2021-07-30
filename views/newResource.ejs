@@ -4,18 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/newResource.css">
     <title>Document</title>
 </head>
 <body>
-    <form method="POST" action="/resources/new">
-    <section>
+    <%- include('partials/_header') %>
+    <form method="POST" action="/api/resources/new">
+        <h3>New Resource</h3>
+    <section class="section-new">
+        <div class="div-new">
+            <input type="text" name='title' placeholder="title">
+            <input type="text" name='url' placeholder="http://">
 
-        <input type="text" name='title' placeholder="title">
-        <input type="text" name='url' placeholder="http://">
-        <input type="text" name='topic' placeholder="topic">
-        <input type="text" name='category' placeholder="category">
-        <input type="text" name='description' placeholder="description">
-        <button type="submit">Post</button>
+            <input type="text" name='category' placeholder="category">
+            <input class="description" type="text" name='description' placeholder="description">
+            <button class="btn-post" type="submit">Post</button>
+       </div>
 
     </section>
 </form>

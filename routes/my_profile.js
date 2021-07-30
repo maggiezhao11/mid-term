@@ -10,13 +10,13 @@ const router  = express.Router();
 
 // create GET route for MY profile
 const myProfile = (db) => {
-  router.get("/:user_id", (req, res) => {
+  router.get("/", (req, res) => {  // "/:id" we only need to put :id in the routes path for params not for
     const userID = req.cookies.user_id;
-    console.log("userID************:", userID);
+    //console.log("userID************:", userID);
     db.query(`SELECT * FROM users WHERE id = $1;`, [userID])
       .then(data =>  {
         const user = data.rows[0];
-        //console.log("data.rows++++++: ", user);
+        console.log("data.rows++++++: ", user);
         res.render("profile", {user})
        })
        .catch(err => {

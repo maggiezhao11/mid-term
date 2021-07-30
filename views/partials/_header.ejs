@@ -4,7 +4,7 @@
 
 
     <% if(user){%>
-      <label>logged in as <%= user %></label>
+      <label>logged in as <%= user.name %></label>
       <form method="POST" action="/api/logout">
         <button
                   type="submit">

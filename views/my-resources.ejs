@@ -6,13 +6,14 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/my-resourcesId.css">
 
     <title>My Resources</title>
   </head>
 
   <body>
 
-  <%- //include('partials/_header') %>
+  <%-include('partials/_header') %>
 
     <main>
       <h3>My Resources</h3>
@@ -21,7 +22,7 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col">Owned Resources</th>
+                      <th class="min-resources" scope="col">Owned Resources</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>
@@ -35,7 +36,7 @@
                           <li>Description: <%= resource.description %></li>
                           <li>Category ID: <%= resource.category_id %></li>
                         </ul>
-                      <td><a href="/api/resources/<%= resource.id %>/edit "> EDIT </a>
+                      <td><a href="/api/resources/<%= resource.id %>/edit "> <button class="btn-edit">EDIT</button>  </a>
                     </td>
                   </tr>
                   <% } %>
@@ -46,7 +47,7 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Liked Resources</th>
+                  <th class="min-resources" scope="col">Liked Resources</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -60,7 +61,7 @@
                       <li>Description: <%= resource.description %></li>
                       <li>Category ID: <%= resource.category_id %></li>
                     </ul>
-                    <td><a href="/resources/<%= resource.id %>/edit "> EDIT </a>
+                    <td><a href="/api/resources/<%= resource.id %>/edit "> <button class="btn-edit">EDIT</button> </a>
                     </td>
               </tr>
               <% } %>
