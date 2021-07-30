@@ -45,3 +45,15 @@ input {
 //     align-items: center;
 
 // }
+
+nav {
+  height: 100px;
+  background-color: #cccc00;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  a {
+    border: none;
+  }
+}

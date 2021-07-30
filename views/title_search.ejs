@@ -5,25 +5,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="/styles/login.css">
+    <link rel="stylesheet" href="/styles/title_search.css">
     <!-- Bootstrap CSS -->
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
 
-    <title>login</title>
+    <title>title search</title></title>
   </head>
 
   <body>
 
-    <%- include('partials/_header', {user: null}) %>
+    <%- include('./partials/_header') %>
 
     <main style="margin: 1em;">
 
   <h2>
-  Please login
+  Search for Resources by a Keyword for Title
 </h2>
-<form action="/api/login" method="POST">
-  <input name="email" placeholder="Email" type="email" />
-  <input name="password" placeholder="password" type="password"/>
+<form action="/api/title_search" method="POST">
+  <input name="title" placeholder="title" type="text" />
   <button type="submit"> Submit </button>
 </form>
     </main>

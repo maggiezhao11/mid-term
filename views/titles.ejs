@@ -4,51 +4,47 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="stylesheet" href="/styles/titles.css">
     <!-- Bootstrap CSS -->
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="/styles/profile.css">
 
-    <title>My Profile</title>
+    <title>Resources by Title</title>
   </head>
 
   <body>
-    <%- include('partials/_header') %>
+
+    <%- include('./partials/_header') %>
 
     <main>
-      <h3 class='my-profile'>My Profile</h3>
-      <section class="my-profile-container">
-          <div class="edit-profile">
+      <h3>Resouces by the Given Keyword for Title Are Listed Here if Any</h3>
+      <section>
+      <div>
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col">Current Details</th>
-                      <th scope="col">New Details</th>
-                      <th scope="col"></th>
+
+
                     </tr>
                   </thead>
                   <tbody>
+                  <% for(let resource of resources) { %>
                     <tr>
                       <td>
                         <ul>
-                          <li>Name: <%= user.name%></li>
-                          <li>Email: <%= user.email%></li>
+                          <li>Title: <%= resource.title %></li>
+                          <li>URL: <%= resource.url%></li>
+                          <li>Description: <%= resource.description %></li>
+                          <li>Category ID: <%= resource.category_id %></li>
                         </ul>
                       </td>
-                      <form method="POST" action="/api/profile/<%= user.id %>">
-                      <td class="new-Details">
-                        <ul>
-                        <li>Name:<input type="text" name="name" value="<%= user.name %>"> </li>
-                        <li>Email:<input type="text" name="email" value="<%= user.email%>"> </li>
-                        <li>Password:<input type="password" name="password" value="<%= user.password %>"> </li>
-                        </ul>
-                      </td>
-                        <td><button class="btn-edit" type="submit">Edit</button></td>
-                      </form>
-                    </tr>
-                  </tbody>
-                </table>
-         </div>
-      </section>
+                  </tr>
+                  <% } %>
+            </div>
+           </tbody>
+        </table>
+
+
+        </section>
 
     </main>
       <!-- Bootstrap JS -->
