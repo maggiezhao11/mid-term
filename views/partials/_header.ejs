@@ -1,10 +1,10 @@
 <header>
   <nav class="navbar navbar-expand-md navbar-dark bg-success">
-    <a style="text-decoration: none" class="navbar-brand" href="/api">Rsources Wall</a>
+    <a style="text-decoration: none" class="navbar-brand" href="/api">Resources Wall</a>
 
 
     <% if(user){%>
-      <label>logged in as <%= user.name %></label>
+      <label>Hi, <%= user.name %></label>
       <form method="POST" action="/api/logout">
         <button
                   type="submit">

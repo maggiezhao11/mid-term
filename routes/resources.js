@@ -224,6 +224,7 @@ const resourceRouter = (db) => {
 
 // create POST route for resource edit
 router.post('/:id/edit' , (req, res) => {
+  const userId = req.cookies.user_id
   const newTitle = req.body.title
   const newURL = req.body.url
   const newDescription = req.body.description
@@ -241,7 +242,13 @@ router.post('/:id/edit' , (req, res) => {
     GROUP BY resources.id, name, topic, title, description, url;`, [resourceId])
     .then((queryResult) => {
       const data = queryResult.rows[0]
-      res.render('edit-resource', data)
+      db.query(`SELECT * FROM users WHERE id = $1`, [userId])
+      .then((user) => {
+        user = user.rows[0];
+        const templateVars = {data, user}
+        res.render('edit-resource', templateVars)
+      })
+
     })
   })
   .catch(err => {console.log(err.message)})
